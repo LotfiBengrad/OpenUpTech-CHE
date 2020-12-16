@@ -1,0 +1,2633 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpenUpDataStructures</name>
+    </assembly>
+    <members>
+        <member name="T:OpenUp.Utils.CSharpExtensions.ListExtensions">
+            <summary>
+            A class adding extensions to the <see cref="T:System.Collections.Generic.List`1"/> class. 
+            </summary>
+        </member>
+        <member name="M:OpenUp.Utils.CSharpExtensions.ListExtensions.AddMany``1(System.Collections.Generic.List{``0},``0[])">
+            <summary>
+            Adds an array of elements to a List.
+            </summary>
+            <param name="list">The List to which the elements are added.</param>
+            <param name="elements">The elements added to the List.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when either the List or Array is null.</exception>
+        </member>
+        <member name="M:OpenUp.Utils.CSharpExtensions.ListExtensions.First``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Returns the first n elements of a List.
+            </summary>
+            <param name="list">The List from which the elements are taken.</param>
+            <param name="count">The number of elements taken.</param>
+            <returns>Returns a new list with the first n elements of the given List.</returns>
+        </member>
+        <member name="M:OpenUp.Utils.CSharpExtensions.ListExtensions.Contains``1(System.Collections.Generic.List{``0},``0[])">
+            <summary>
+            Checks whether or not a range of elements exists in a List.
+            </summary>
+            <param name="list">Dictionary against which a range of elements are checked.</param>
+            <param name="elements">The elements checked against the List.</param>
+            <returns>True when all passed elements exist in the List, false when one or more do not.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when either the List or Array is null.</exception>
+        </member>
+        <member name="M:OpenUp.Utils.CSharpExtensions.ListExtensions.MinBy``1(System.Collections.Generic.List{``0},System.Func{``0,System.Single})">
+            <summary>
+            Find the list item for which comparer produces the smallest value. If multiple items have the smallest value, returns the first one found.
+            </summary>
+            <param name="list">The list to search through.</param>
+            <param name="comparer">Function that returns a float for each list item.</param>
+            <returns>The "smallest" item according to comparer.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when either the List or Array is null or has length 0.</exception>
+        </member>
+        <member name="M:OpenUp.Utils.CSharpExtensions.ListExtensions.MinBy``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Single},System.Single@)">
+            <summary>
+            Find the list item for which comparer produces the smallest value. If multiple items have the smallest value, returns the first one found.
+            </summary>
+            <param name="list">The list to search through.</param>
+            <param name="comparer">Function that returns a float for each list item.</param>
+            <param name="min">The smallest value.</param>
+            <returns>The "smallest" item according to comparer.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when either the List or Array is null or has length 0.</exception>
+        </member>
+        <member name="M:OpenUp.Utils.CSharpExtensions.ListExtensions.AllMinBy``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Single})">
+            <summary>
+            Returns all objects that have the lowest value given by comparer.
+            </summary>
+            <param name="enumerable">The collection to look through.</param>
+            <param name="comparer">The function that returns a numeric value for each object in the collection.</param>
+            <typeparam name="T">The type of objects in the collection.</typeparam>
+            <returns>A collection that contains all objects that have to lowest value via comparer.</returns>
+            <example>
+            Vector2[] points = new Vector2[] {
+                new Vector2(0,3),
+                new Vector2(1,1),
+                new Vector2(4,1),
+                new Vector2(3,2)
+            };
+            
+            return points.AllMinBy(v => v.y)
+            // returns { (1,1), (4,1) }
+            </example>
+        </member>
+        <member name="T:OpenUp.Utils.IBinaryHandler`1">
+            <summary>
+            Represents an object that can turn <typeparamref name="T"/> into
+            binary data and vice versa
+            </summary>
+            <typeparam name="T">The type of object this handler can convert</typeparam>
+        </member>
+        <member name="P:OpenUp.Utils.IBinaryHandler`1.ReadObject">
+            <summary>
+            The function that turns binary data int o a <typeparamref name="T"/> .
+            </summary>
+        </member>
+        <member name="P:OpenUp.Utils.IBinaryHandler`1.SizeObject">
+            <summary>
+            The function that determines the size of a <typeparamref name="T"/> in binary.
+            </summary>
+        </member>
+        <member name="P:OpenUp.Utils.IBinaryHandler`1.WriteObject">
+            <summary>
+            The function that converts a <typeparamref name="T"/> into bytes.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Utils.IBinaryHandler`1.GetBytes(`0)">
+            <summary>
+            Returns the object as a byte array.
+            </summary>
+            <param name="item">The object to turn into binary data.</param>
+            <returns>The object as binary data.</returns>
+        </member>
+        <member name="T:OpenUp.Utils.ObjectBinaryHandler`1">
+            <summary>
+            The simplest implementation of <see cref="T:OpenUp.Utils.IBinaryHandler`1"/>
+            </summary>
+            <typeparam name="T">The type of object this handler can convert</typeparam>
+        </member>
+        <member name="P:OpenUp.Utils.ObjectBinaryHandler`1.ReadObject">
+            <inheritdoc/>
+        </member>
+        <member name="P:OpenUp.Utils.ObjectBinaryHandler`1.SizeObject">
+            <inheritdoc/>
+        </member>
+        <member name="P:OpenUp.Utils.ObjectBinaryHandler`1.WriteObject">
+            <inheritdoc/>
+        </member>
+        <member name="M:OpenUp.Utils.ObjectBinaryHandler`1.GetBytes(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:OpenUp.Utils.Pipeline`2">
+            <summary>
+            Pipelines are used to take multiple objects of arbitrary type
+            and convert them to and from binary.
+            </summary>
+            <typeparam name="T1">First type to convert</typeparam>
+            <typeparam name="T2">Second type to convert</typeparam>
+        </member>
+        <member name="T:OpenUp.Utils.BinaryUtils">
+            <summary>
+            A bunch of methods to make it easier to manipulate binary data
+            </summary>
+        </member>
+        <member name="P:OpenUp.Utils.BinaryUtils.GUID_SIZE">
+            <summary>
+            The byte size of a <see cref="T:System.Guid"/>
+            </summary>
+        </member>
+        <member name="M:OpenUp.Utils.BinaryUtils.StringSize(System.String)">
+            <summary>
+            Get the size of a string when encoded into bytes.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Utils.BinaryUtils.ReadStruct``1(System.ArraySegment{System.Byte})">
+            <summary>
+            Read the given bytes in to a new struct of type <see cref="!:T"/>
+            </summary>
+            <remarks>This function works on an extremely low level and copies the individual bytes.</remarks>
+            <param name="data">A set of bytes to read out.</param>
+            <typeparam name="T">The type of the object being read, must be unmanaged.</typeparam>
+            <seealso href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types"/>
+            <returns>A new object of the required type.</returns>
+            <exception cref="T:System.IO.InvalidDataException">If the slice is smaller than the size of the Type to be written to.</exception>
+        </member>
+        <member name="M:OpenUp.Utils.BinaryUtils.ReadStruct``1(System.ArraySegment{System.Byte},``0@)">
+            <summary>
+            Reads the data as an unmanaged type.
+            </summary>
+            <param name="data">The data to be read, only first sizeof(T) bytes are read and the rest is ignored.</param>
+            <param name="target"></param>
+            <typeparam name="T">Type to read data as, must be unmanaged, i.e. a struct that only has structs or numbers/bools as fields (which must also be unmanaged)</typeparam>
+            <returns></returns>
+            <exception cref="T:System.IO.InvalidDataException"></exception>
+        </member>
+        <member name="M:OpenUp.Utils.BinaryUtils.ReadBlock``1(System.ArraySegment{System.Byte},``0[]@)">
+            <summary>
+            Reads some binary data to an array of unmanaged objects
+            </summary>
+            <param name="data"></param>
+            <param name="block"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Utils.BinaryUtils.SizeBlock``1(``0[])">
+            <summary>
+            Gets the binary size of an array of unmanaged objects
+            </summary>
+            <param name="block"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Utils.BinaryUtils.WriteBlock``1(``0[],System.Byte[],System.Int32)">
+            <summary>
+            Copies a array of unmanaged objects to a buffer.
+            </summary>
+            <param name="block"></param>
+            <param name="buffer"></param>
+            <param name="startIdx"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Utils.CollectionUtils.UnionOf``1(System.Collections.Generic.HashSet{``0}[])">
+            <summary>
+            Return a single hashset that contains all items in any of the given sets.
+            </summary>
+            <param name="sets">The sets to combine.</param>
+            <returns>A single set with all the items.</returns>
+        </member>
+        <member name="M:OpenUp.Utils.CollectionUtils.UnionOf``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.HashSet{``0}})">
+            <summary>
+            Return a single hashset that contains all items in any of the given sets.
+            </summary>
+            <param name="sets">The sets to combine.</param>
+            <returns>A single set with all the items.</returns>
+        </member>
+        <member name="T:OpenUp.Utils.OpenToUsersAttribute">
+            <summary>
+            This attribute is used to indicate that the target method or property is
+            something that is settable and usable by the user generated app.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Utils.OpenToUsersAttribute.nameEnglish">
+            <summary>
+            The name of the member in English
+            </summary>
+        </member>
+        <member name="F:OpenUp.Utils.OpenToUsersAttribute.nameDutch">
+            <summary>
+            The name of the member in Dutch.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Utils.OpenToUsersAttribute.complexityLevel">
+            <summary>
+            How hard the member's functionality is to understand. Is used to filter
+            members displayed to the users to avoid giving to many complex possibilities.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Utils.OpenToUsersAttribute.phase">
+            <inheritdoc />
+            <inheritdoc cref="T:OpenUp.DataStructures.Phase"/>
+        </member>
+        <member name="M:OpenUp.Utils.OpenToUsersAttribute.#ctor(System.String,System.Int32,OpenUp.DataStructures.Phase)">
+            <summary>
+            Constructs an <see cref="T:OpenUp.Utils.OpenToUsersAttribute"/> with only an English name.
+            </summary>
+            <param name="displayName">The English name.</param>
+            <param name="_complexityLevel">The complexity of the member.</param>
+        </member>
+        <member name="M:OpenUp.Utils.OpenToUsersAttribute.#ctor(System.String,System.String,System.Int32,OpenUp.DataStructures.Phase,System.String)">
+            <summary>
+            Constructs an <see cref="T:OpenUp.Utils.OpenToUsersAttribute"/> with an English
+            and a Dutch name.
+            </summary>
+            <param name="english">The English name.</param>
+            <param name="dutch">The Dutch name.</param>
+            <param name="_complexityLevel">The complexity of the member.</param>
+        </member>
+        <member name="M:OpenUp.Utils.OpenToUsersAttribute.GetTargetMembers(System.Type,System.Boolean,System.Int32)">
+            <summary>Get members from components such as behaviours</summary>
+        </member>
+        <member name="T:OpenUp.Utils.OpenToUsersTester">
+            <summary>
+            Static class used to get details about members of custom classes.
+            <seealso cref="T:OpenUp.Utils.OpenToUsersAttribute"/>
+            </summary>
+        </member>
+        <member name="M:OpenUp.Utils.ExpressionBuilder.TransformToExpression(System.String,OpenUp.DataStructures.TransformStructure)">
+            <summary>
+            Takes the TransformStructure of an object with the given objectID and returns expressions to set the structure in its current state.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.Utils.IWritableToBytes">
+            <summary>
+            Declares that objects can write to bytes.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Utils.IWritableToBytes.ToBytes">
+            <summary>
+            Gets the bytes as <see cref="T:System.Byte"/>
+            </summary>
+            <returns>The data.</returns>
+        </member>
+        <member name="M:OpenUp.Utils.IWritableToBytes.WriteToBuffer(System.Byte[],System.Int32)">
+            <summary>
+            Writes the bytes onto a given array.
+            </summary>
+            <param name="buffer">The array to write bytes onto.</param>
+            <param name="startIdx">Where to start writing the bytes in the buffer.</param>
+        </member>
+        <member name="M:OpenUp.Utils.IWritableToBytes.GetByteLength">
+            <summary>
+            Get the size of the object in bytes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.AppStructure">
+            <summary>
+            C# data structure for the Solution data.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.AppStructure.Audience">
+            <summary>
+            Enum that represents who can load this solution.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.Audience.PRIVATE">
+            <summary>
+            User who made this solution is the only one who can load it.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.Audience.FRIENDS">
+            <summary>
+            User who made the solution and their friends are the only ones who can load it. 
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.Audience.TENANT">
+            <summary>
+            Can be loaded by anyone of the organization that the solution belongs to.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.Audience.PUBLIC">
+            <summary>
+            Can be loaded by anyone.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.id">
+            <summary>
+            The string identifier for the solution
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.name">
+            <summary>
+            The display name of the solution
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.tenant">
+            <summary>
+            The organization that owns the solution.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.audience">
+            <summary>
+            How publicly viewable the solution is.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.objects">
+            <summary>
+            The objects that the solution can load into the world.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.variables">
+            <summary>
+            Globally defined variables.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.AppStructure.events">
+            <summary>
+            global events that can be listened to and triggered.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.AppStructure.#ctor(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a solution data structure from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.AppStructure.SetBasics(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets all the simple properties of the solution data to match the given data.
+            </summary>
+            <param name="data">The solution data.</param>
+            <param name="idx"></param>
+        </member>
+        <member name="M:OpenUp.DataStructures.AppStructure.HasObject(System.String)">
+            <summary>
+            Checks if there is an object with the given id present in the data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.AppStructure.WriteToBytes(System.Byte[],System.Int32)">
+            <summary>
+            Converts the object to Bytes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.AppStructure.SetFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Updates the AppStructure to match some new binary data.
+            </summary>
+            <param name="data">
+            The binary data that should be used to update the AppStructure.
+            </param>
+        </member>
+        <member name="M:OpenUp.DataStructures.AppStructure.ToBytes">
+            <inheritdoc />
+        </member>
+        <member name="M:OpenUp.DataStructures.AppStructure.WriteToBuffer(System.Byte[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:OpenUp.DataStructures.AppStructure.GetByteLength">
+            <inheritdoc />
+        </member>
+        <member name="T:OpenUp.DataStructures.ElementID">
+            <summary>
+            Identifier that is used for GameObjects, contains inheritance info that
+            allows for parent-child relations.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ElementID.GLOBAL">
+            <summary>
+            Reserved unique id for the root of a solution, it is the parent of all ElementIDs.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ElementID.NONE">
+            <summary>
+            Reserved unique id representing no id.
+            <remarks>
+            This is not the same as <c>null</c>, which means no data known.
+            See this as getting the answer "NO" whilst <c>null</c> should be reserved
+            for not knowing an answer.
+            </remarks>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ElementID.componentID">
+            <summary>
+            The id of the object, this is the same for all instances of an object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ElementID.index">
+            <summary>
+            The hierarchical index of this object, i.e. if it is the nth child, then
+            the value is n.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ElementID.path">
+            <summary>
+            The hierarchical path of the instance, each parent is given as a tuple
+            where the first item is the parent's componentID and the second item
+            is the parent's index.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ElementID.instanceID">
+            <summary>
+            String representation of the elementID, this refers specifically to single
+            instance of an object.
+            </summary>
+            <remarks>Created on construction and saved for future reference.</remarks>
+        </member>
+        <member name="F:OpenUp.DataStructures.ElementID.hashCode">
+            <summary>
+            Hashcode is generated once on creation to speed up comparisons. (hashcode is equal to instance id hashcode)
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ElementID.parent">
+            <summary>
+            The componentID of the direct parent, null if the instance has no parents.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ElementID.parentElement">
+            <summary>
+            The <see cref="T:OpenUp.DataStructures.ElementID"/> of the parent instance.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.#ctor(System.String)">
+            <summary>
+            Use this constructor to create reserved ids for specific objects or scopes.
+            </summary>
+            <param name="special">The name for the unique id</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.#ctor(System.String,System.Int32)">
+            <summary>
+            Constructs an ElementID for an object without a parent.
+            </summary>
+            <param name="id">The componentID of the instance</param>
+            <param name="idx">The hierarchical index</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.#ctor(System.String,System.Int32,OpenUp.DataStructures.ElementID)">
+            <summary>
+            Constructs an ElementID for an object with a given parent.
+            </summary>
+            <param name="id">The componentID of the instance</param>
+            <param name="idx">The hierarchical index</param>
+            <param name="parent">The instance that the ElementID should be parented to</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.#ctor(System.Collections.Generic.List{System.Tuple{System.String,System.Int32}})">
+            <summary>
+            Creates an ElementID using a path for the instance.
+            </summary>
+            <param name="sourcePath">List of string-int pairs representing the componentID and index of each parent.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.ToString">
+            <summary>
+            Converts the ElementID to a string representation that is unique and specific to the instance.
+            </summary>
+            <returns>The ElementID as string</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.SubPath(System.Int32)">
+            <summary>
+            Gets the parent ElementID at the given depth. If the given depth is greater than the depth
+            of the ElementID, then a copy of self is returned. 
+            </summary>
+            <param name="idx">How many parents deep should be returned</param>
+            <returns>The parent at the given depth</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.IsParentOf(OpenUp.DataStructures.ElementID,System.Boolean)">
+            <summary>
+            Checks if this ElementID is a parent of the passed ElementID. A optional second argument
+            can be passed to specify if the entire path should be checked or just the immediate parent.
+            </summary>
+            <param name="possibleKid">The id for which you want to know if it is a child</param>
+            <param name="directOnly">Set to true to do the check only for the first parent</param>
+            <returns>True if self is a parent of possibleKid, otherwise False</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.IsChildOf(System.String)">
+            <summary>
+            Checks if the object with id: <paramref name="componentID"/> is a parent of this instance.
+            </summary>
+            <param name="componentID">The componentID of the object.</param>
+            <returns>True if the object is a parent of the instance, otherwise false.</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.GetHashCode">
+            <summary>
+            HashCode implementation, needed for usage as Dictionary keys.
+            </summary>
+            <returns>Integer representing the hash, equal ElementIDs always have equal hashes.</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.Equals(OpenUp.DataStructures.ElementID)">
+            <summary>
+            Checks if two ElementIDs refer to the same instance, needed for the IEquatable interface.
+            </summary>
+            <param name="id">The other ElementID.</param>
+            <returns>True if they refer to the same instance.</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.Equals(System.Object)">
+            <summary>
+            Checks if two ElementIDs refer to the same instance, needed for the IEquatable interface.
+            </summary>
+            <param name="obj">The other ElementID, gets soft-casted if not an ElementID</param>
+            <returns>True if they refer to the same instance.</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.op_Equality(OpenUp.DataStructures.ElementID,OpenUp.DataStructures.ElementID)">
+            <summary>
+            Checks if two ElementIDs refer to the same instance, needed for the IEquatable interface.
+            </summary>
+            <returns>True if they refer to the same instance, or are both null.</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.op_Inequality(OpenUp.DataStructures.ElementID,OpenUp.DataStructures.ElementID)">
+            <summary>
+            Checks if two ElementIDs do not refer to the same instance, needed for the IEquatable interface.
+            </summary>
+            <returns>True if they refer do not to the same instance, or if either, but not both, are null.</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.op_Addition(OpenUp.DataStructures.ElementID,System.String)">
+            <summary>
+            Creates a new ElementID by creating a child of the ElementID with the string as componentID
+            </summary>
+            <returns>A new child ElementID</returns>
+            <remarks>This will always create an ElementID with index 0, so adding multiple times gives equal results</remarks>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.op_Addition(OpenUp.DataStructures.ElementID,OpenUp.DataStructures.ElementID)">
+            <summary>
+            Creates a new ElementID by appending the path of the child to the path of the parent.
+            </summary>
+            <returns>A new child ElementID</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ElementID.FromString(System.String)">
+            <summary>
+            Creates an ElementID from a string, this is used to convert JSON data strings to ElementIDs.
+            This source string will be equal to the resulting ElementID's instanceID property.
+            </summary>
+            <remarks>Note that
+            <code>elementID == ElementID.FromString(elementID.instanceID)</code>
+            </remarks>		
+            <remarks>This method is quite expensive and should not be used for derived properties. (Should do something about that)</remarks>
+        </member>
+        <member name="M:OpenUp.DataStructures.ExpressionStructures.OUExpression.GetRelevantParts">
+            <summary>
+            Gets nodes in an expression that would be removed in an attempt to recycle them into any replacing expression that has use of these nodes.
+            </summary>
+            <param name="data"></param>
+            <returns>Returns a list of expression nodes that can be cycled back.</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ExpressionStructures.OUExpression.GetIUpdateTarget(System.String)">
+            <summary>
+            Delegates the implementation of <see cref="M:OpenUp.Updating.IUpdateTarget.GetTarget(System.String)"/> to the inheritor.
+            </summary>
+            <seealso cref="M:OpenUp.Updating.IUpdateTarget.GetTarget(System.String)"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ExpressionStructures.OUExpression.GetIUpdateValue(System.String)">
+            <summary>
+            Delegates the implementation of <see cref="M:OpenUp.Updating.IUpdateTarget.GetValue(System.String)"/> to the inheritor.
+            </summary>
+            <remarks>The case of field == type has been handled in the base class</remarks>
+            <seealso cref="M:OpenUp.Updating.IUpdateTarget.GetValue(System.String)"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ExpressionStructures.OUExpression.SetIUpdateValue(System.String,System.ArraySegment{System.Byte})">
+            <summary>
+            Delegates the implementation of <see cref="M:OpenUp.Updating.IUpdateTarget.SetValue(System.String,System.ArraySegment{System.Byte})"/> to the inheritor.
+            </summary>
+            <remarks>The case of field == type has been handled in the base class</remarks>
+            <seealso cref="M:OpenUp.Updating.IUpdateTarget.SetValue(System.String,System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ExpressionStructures.OUExpression.RemoveIUpdateValue(System.String)">
+            <summary>
+            Delegates the implementation of <see cref="M:OpenUp.Updating.IUpdateTarget.RemoveValue(System.String)"/> to the inheritor.
+            </summary>
+            <remarks>By default, a <see cref="T:System.NotSupportedException"/> is thrown.</remarks>
+            <seealso cref="M:OpenUp.Updating.IUpdateTarget.RemoveValue(System.String)"/>
+        </member>
+        <member name="T:OpenUp.DataStructures.DataStructure">
+            <summary>
+            Base class for processed app data.
+            Contains methods converting and assigning binary to C# properties.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.ItemStructure">
+            <summary>
+            Represents an item like a object or an action inside the app structure.
+            <remarks>Has an ID method so that items can be added to dictionaries</remarks>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ItemStructure.genericPath">
+            <summary>
+            This path points to where items of the same type can be found in the solutiondata.
+            <para>If you want the path to this specific item, use <see cref="P:OpenUp.DataStructures.ItemStructure.itemPath"/> instead.</para>
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ItemStructure.itemPath">
+            <summary>
+            A path pointing to this item in the solution data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ItemStructure.GetID">
+            <summary>
+            Returns a string id for the item.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ItemStructure.SetFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Updates the item to some new data.
+            </summary>
+            <param name="data">New data for the item.</param>
+        </member>
+        <member name="T:OpenUp.DataStructures.LDraw.Commands.LDrawCommand">
+            <summary>
+            Represents a single instruction in an LDraw file.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.Commands.LDrawCommand.commandType">
+            <summary>
+            The type of instruction this is.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.Commands.LDrawCommand.color">
+            <summary>
+            The color code for this instruction.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.LDraw.Commands.LDrawQuad">
+            <summary>
+            The instruction for LDraw to render a quad.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.Commands.LDrawQuad.vertices">
+            <summary>
+            The vertices for this quad.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.LDraw.Commands.LDrawSubFile">
+            <summary>
+            the instruction for LDraw to render another model
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.Commands.LDrawSubFile.matrix">
+            <summary>
+            The positioning matrix for this subfile.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.Commands.LDrawSubFile.fileId">
+            <summary>
+            The file id or name of the file to load in.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.LDraw.Commands.LDrawTriangle">
+            <summary>
+            The instruction for LDraw to render a triangle.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.Commands.LDrawTriangle.vertices">
+            <summary>
+            The vertices for this triangle.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.LDraw.LDrawModel">
+            <summary>
+            Represents a LDraw file, it contains the meta data and a list of instructions
+            to render a lego model.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.LDrawModel.id">
+            <summary>
+            ID for the file.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.LDrawModel.name">
+            <summary>
+            The name for the model.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.LDrawModel.owner">
+            <summary>
+            The person who made this model.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.LDrawModel.category">
+            <summary>
+            The category this model belongs to, if it has any.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.LDrawModel.keywords">
+            <summary>
+            List of keywords/tags for the model, to help with searching.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.LDrawModel.isSubpart">
+            <summary>
+            If true, this model is a small part of a larger whole. For example,
+            this is true if the model represents the stud of a brick. but false
+            if the model is for the entire brick.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.LDrawModel.commands">
+            <summary>
+            The commands to render the model.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.LDraw.SearchOptions">
+            <summary>
+            Search options for LDraw fetch server calls.
+            Any values left at their default will be ignored when filtering the results.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.SearchOptions.matchAllOptions">
+            <summary>
+            Whether models need to match all the specified options (default), or only need to match one.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.SearchOptions.name">
+            <summary>
+            Search for (partial) matches in the names of the models.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.SearchOptions.keywords">
+            <summary>
+            Search for models that have all of these keywords. Order doesn't matter.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.SearchOptions.category">
+            <summary>
+            Filter models based on their category.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.SearchOptions.maxCount">
+            <summary>
+            The maximum amount of models to return. Will return all matching models if less are found.
+            Defaults to 100. Set to 0 to remove the limit and always return all matches.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.LDraw.SearchOptions.Categories">
+            <summary>
+            Officially approved LDraw model categories.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.SearchOptions.Categories.ANY">
+            <summary>
+            Disables category filtering.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.LDraw.SearchOptions.Categories.NONE">
+            <summary>
+            Matches all models without a category.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.TransformStructure">
+            <summary>
+            Holds the position, rotation, and scale of a
+            <see cref="T:OpenUp.DataStructures.ObjectStructure"/>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.TransformStructure.position">
+            <summary>
+            The position of the object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.TransformStructure.rotation">
+            <summary>
+            The rotation of a object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.TransformStructure.scale">
+            <summary>
+            The scale of object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.TransformStructure.hash">
+            <summary>
+            The hash code for the transform.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.TransformStructure.#ctor(OpenUp.DataStructures.TransformStructure)">
+            <summary>
+            Creates a new transform structure that is a copy of the given transform.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.TransformStructure.IDENTITY">
+            <summary>
+            Transform that leaves an object unchanged.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.ObjectMap">
+            <summary>
+            Collection to hold all solution object definitions. Has a custom
+            <see cref="!:GetHashCode"/> for faster updating.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.ObjectStructure">
+            <summary>
+            The structure for an object definition. This structure is used by the
+            <see cref="!:Actions.LoadObject"/> action to instantiate objects
+            in the interpreter.
+            </summary>
+            <remarks>
+            Each time a object is loaded in the solution, A new ObjectStructure is made
+            for in that loaded scope.
+            </remarks>
+        </member>
+        <member name="F:OpenUp.DataStructures.ObjectStructure.id">
+            <summary>
+            The unique identifier for the object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ObjectStructure.name">
+            <summary>
+            The name for the object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ObjectStructure.transform">
+            <summary>
+            The transform for the object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ObjectStructure.visualization">
+            <summary>
+            What is visible in solution for this object, used to create
+            a <see cref="!:Visualizations.VisualizationBase"/>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ObjectStructure.children">
+            <summary>
+            The ids for the starting children of this object.
+            </summary>
+            <remarks>
+            Note that the children at playtime can be different as
+            a object story could have loaded more children.
+            </remarks>
+        </member>
+        <member name="F:OpenUp.DataStructures.ObjectStructure.behaviours">
+            <summary>
+            Properties for each <see cref="!:BehaviourBase"/> on this object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ObjectStructure.events">
+            <summary>
+            Map containing the event for this object.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ObjectStructure.localVariables">
+            <summary>
+            Collection of named variables to add to this object's scope.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.#ctor(System.ArraySegment{System.Byte},OpenUp.Updating.UpdatePath,System.Int32@)">
+            <summary>
+            Constructs an ObjectStructure from some JSON data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.SetBasics(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets the <see cref="F:OpenUp.DataStructures.ObjectStructure.id"/>, <see cref="F:OpenUp.DataStructures.ObjectStructure.name"/>, and <see cref="!:stories"/> to match
+            some binary data.
+            </summary>
+            <param name="data">The data for the entire object.</param>
+            <param name="idx">The new position to read from.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.SetVisualization(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets the <see cref="F:OpenUp.DataStructures.ObjectStructure.visualization"/> from some binary data.
+            </summary>
+            <param name="data">The data for the entire object.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.SetEvents(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets the <see cref="!:objectStories"/> from some binary data.
+            </summary>
+            <param name="data">The data for the entire object.</param>
+            <param name="idx"></param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.UpdateFromBase(OpenUp.DataStructures.ObjectStructure)">
+            <summary>
+            Update a loaded object from the base data.
+            </summary>
+            <param name="template">The base data for this object.</param>
+            <param name="scope">Accessor that contains the properties that have been changed during runtime.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc cref="M:OpenUp.DataStructures.ItemStructure.SetFromBytes(System.ArraySegment{System.Byte})"/>
+            <remarks>Implements hashcode comparision on fields to speed up updating</remarks>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.WriteToBytes(System.Byte[],System.Int32)">
+            <summary>
+            Converts the data of this object ot bytes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.WriteToBytes(OpenUp.DataStructures.ObjectStructure,System.Byte[],System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="object"></param>
+            <param name="buffer"></param>
+            <param name="startIdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.GetID">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ItemStructure.GetID"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ObjectStructure.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:OpenUp.DataStructures.PropertyList">
+            <summary>
+            Dictionary that holds a set properties by name,
+            a <see cref="T:OpenUp.DataStructures.PropertyShape"/> is used to define
+            the types and defaults for each property.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.PropertyList.shape">
+            <summary>
+            The names of the properties, their types, and their default values.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertyList.GetValue``1(System.String)">
+            <summary>
+            Get a value by name in the type requested. If the property has not
+            be set explicitly, then its default is returned.
+            </summary>
+            <param name="key">The name of the property</param>
+            <typeparam name="T">The OUValue derived type that should be used for the property</typeparam>
+            <returns>The property.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">This is thrown when the property is not present in the property list.</exception>
+            <exception cref="T:System.InvalidCastException">This is thrown if the requested type does not match the property type.</exception>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertyList.ReadFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets each property from binary data.
+            </summary>
+            <param name="data">All the properties for the list.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertyList.SetFromDictionary(System.Collections.Generic.Dictionary{System.String,OpenUp.DataStructures.ValueStructures.OUValue})">
+            <summary>
+            Sets each value in the list from some other dictionary.
+            </summary>
+            <param name="dict">
+            Dictionary containing OUValues. The OUValues are assigned, not copied,
+            so any changes to them affects both the dictionary and the prop list.
+            </param>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertyList.WriteToBytes(System.Byte[],System.Int32)">
+            <summary>
+            Converts the property list to binary.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertyList.UpdateFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Updates the PropertyList to match some binary data.
+            </summary>
+            <param name="data">Some binary data.</param>
+        </member>
+        <member name="T:OpenUp.DataStructures.PropertyShape">
+            <summary>
+            Dictionary holding the definition of a set of properties
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.PropertySpec">
+            <summary>
+            Definition of a single property including its type, and default value.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.PropertySpec.type">
+            <summary>
+            The type of the property.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.PropertySpec.defaultValue">
+            <summary>
+            The default value for the property.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.PropertySpec.entries">
+            <summary>
+            If the type is a collection, then this states what the shape
+            of the items in the collection is.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.PropertySpec.shape">
+            <summary>
+            If the type is a key collection (i.e. a <see cref="T:OpenUp.DataStructures.ValueStructures.OUDict"/>), then it can have
+            a shape defining which properties are nested in this.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertySpec.#ctor(OpenUp.DataStructures.ValueStructures.ValueType,OpenUp.DataStructures.ValueStructures.OUValue)">
+            <summary>
+            Constructs a property specification with given type and default value.
+            </summary>
+            <param name="type">The type for the property.</param>
+            <param name="value">The default value for the property.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertySpec.#ctor(OpenUp.DataStructures.ValueStructures.OUValue,OpenUp.DataStructures.PropertySpec)">
+            <summary>
+            Constructs a collection property specification with the given type,
+            default value, and entry specification.
+            </summary>
+            <param name="type">The type for the value.</param>
+            <param name="value">the default value.</param>
+            <param name="entries">The type for each entry in the collection.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if you attempt to make a non-collection type have entries.
+            </exception>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertySpec.#ctor(OpenUp.DataStructures.ValueStructures.OUValue,OpenUp.DataStructures.PropertyShape)">
+            <summary>
+            Constructs a collection property specification with the given type,
+            default value, and shape.
+            </summary>
+            <param name="type">The type for the value.</param>
+            <param name="value">the default value.</param>
+            <param name="shape">The shape for collection.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if you attempt to make a non-collection type have a shape.
+            </exception>
+        </member>
+        <member name="M:OpenUp.DataStructures.PropertySpec.ToValue(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates an OUValue from some binary data.
+            </summary>
+            <param name="data">The binary data.</param>
+            <returns>
+            If the data was interpretable, the data as OUValue is return,
+            otherwise the default value is returned.
+            </returns>
+        </member>
+        <member name="P:OpenUp.DataStructures.PropertySpec.DEFAULT_TEXT">
+            <summary>
+            Property specification for some text with a programmer's first words as the default.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.PropertySpec.DEFAULT_COLOR">
+            <summary>
+            Property specification for a color with the default as white.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.PropertySpec.DEFAULT_SCALE">
+            <summary>
+            Property specification for a number with the default value of 1.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.PropertySpec.DEFAULT_FALSE">
+            <summary>
+            Property specification for a boolean with default value false.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.PropertySpec.DEFAULT_TRUE">
+            <summary>
+            Property specification for a boolean with default value true.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.PropertySpec.IDENTITY_TRANSFORM">
+            <summary>
+            Property specification for a transform with the identity as the default value.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.SceneShots.SceneShot">
+            <summary>
+            Represents all the information required to construct a snap-shot of the current scene
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.SceneShots.SceneShot.id">
+            <summary>
+            ID of the document (mapped to the _id field in the database). Set automatically to a new GUID.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.SceneShots.SceneShot.appID">
+            <summary>
+            ID of the app this scene shot belongs to
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.SceneShots.SceneShot.objects">
+            <summary>
+            List of <see cref="T:OpenUp.DataStructures.SceneShots.SceneShotObject"/> objects that are part of this scene shot
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.SceneShots.SceneShotObject">
+            <summary>
+            Represents an object in the scene to be included in a <see cref="T:OpenUp.DataStructures.SceneShots.SceneShot"/>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.SceneShots.SceneShotObject.transform">
+            <summary>
+            The transform data of the object
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.SceneShots.SceneShotObject.color">
+            <summary>
+            The object's color
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.SceneShots.SceneShotObject.vertices">
+            <summary>
+            Array of vertices, each represented as a <see cref="T:UnityEngine.Vector3"/>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.SceneShots.SceneShotObject.triangles">
+            <summary>
+            Array of triangles, each represented as an integer
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.Usages">
+            <summary>
+            This enum indicates where an item get used in the workflow.
+            </summary>
+            <remarks>
+            Is set up as bit-flags as some items can be used at multiple points in the workflow
+            </remarks>
+        </member>
+        <member name="T:OpenUp.DataStructures.Phase">
+            <summary>
+            This enum indicates how finished an item/feature is.
+            </summary>
+            <remarks>
+            Inherits from int so that <c>&gt;</c> and <c>&lt;</c>
+            can be used to compare to a minimum value.
+            </remarks>
+        </member>
+        <member name="F:OpenUp.DataStructures.BehaviourStructure.props">
+            <summary>
+            Properties for the visual.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.BehaviourStructure._type">
+            <summary>
+            Backing field for <see cref="P:OpenUp.DataStructures.BehaviourStructure.type"/>.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.BehaviourStructure.type">
+            <summary>
+            Type of the visual.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.BehaviourStructure.shape">
+            <summary>
+            The shape for the properties.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.BehaviourStructure.#ctor(System.ArraySegment{System.Byte})">
+            <summary>
+            Constructs visual data from some binary data.
+            </summary>
+            <param name="data">The binary data.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.BehaviourStructure.SetBasics(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets basic details from some binary data.
+            </summary>
+            <param name="data">Binary data for the entire visual.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.BehaviourStructure.SetProps(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets the properties in the property list from some binary data.
+            </summary>
+            <param name="data">The binary data.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.BehaviourStructure.UpdateProps(System.ArraySegment{System.Byte})">
+            <summary>
+            Updates the properties in the property list from some binary data.
+            </summary>
+            <param name="data">The binary data.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.BehaviourStructure.SetFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Updates this visual to match some binary data.
+            short-circuits if updates aren't needed according to hashes.
+            </summary>
+            <param name="data">Some binary data.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.BehaviourStructure.WriteToBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates a binary representation of the visual.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.EventSet.#ctor">
+            <summary>
+            Constructor is require for MongoDB and should not be used in any other case.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.EventSet.#ctor(OpenUp.Updating.UpdatePath)">
+            <summary>
+            Constructs an event set with the given path, all events in the set will
+            use this path as their parent path.
+            </summary>
+            <param name="_path"></param>
+        </member>
+        <member name="M:OpenUp.DataStructures.EventSet.GetReferencedBehaviours">
+            <summary>
+            Gets all behaviours that events in this set reference.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.EventSet.ReadAsField(System.String)">
+            <summary>
+            The FieldReadMethod for <see cref="T:OpenUp.DataStructures.EventSet"/>
+            </summary>
+            <seealse cref="T:OpenUp.Updating.ReaderMap"/>
+        </member>
+        <member name="T:OpenUp.DataStructures.Event">
+            <summary>
+            Represents an action by the user, and a response by the app.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.Event.id">
+            <summary>
+            The unique identifier of this interaction.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.Event.index">
+            <summary>
+            The index of this event in the set, events are
+            checked in order of index.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.Event.name">
+            <summary>
+            A human readable name for this interaction.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.Event.groupName">
+            <summary>
+            The name of group this event belongs to.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.Event.activeAtStart">
+            <summary>
+            Determines whether this interaction is active on startup.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.Event.condition">
+            <summary>
+            Represents the action of the user that is being listened for. When this
+            expression evaluates to true, then the user has acted and the response is fired.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.Event.response">
+            <summary>
+            Statement block that is executed when the condition is met.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.GetReferencedBehaviours">
+            <summary>
+            Finds all behaviours referenced by this event.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.GetID">
+            <inheritdoc />
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.ReadEvent(OpenUp.Updating.UpdatePath)">
+            <summary>
+            Second order function that creates a reader that reads binary
+            to events as child of a given update path.
+            </summary>
+            <param name="parentPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.WriteEvent(OpenUp.DataStructures.Event,System.Byte[],System.Int32)">
+            <summary>
+            Writes an event to e binary buffer.
+            </summary>
+            <param name="eve"></param>
+            <param name="buffer"></param>
+            <param name="startIdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc cref="T:OpenUp.DataStructures.IUpdateable"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.ToBytes">
+            <inheritdoc />
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.WriteToBuffer(System.Byte[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.GetByteLength">
+            <inheritdoc />
+        </member>
+        <member name="M:OpenUp.DataStructures.Event.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUBool">
+            <summary>
+            A OUValue wrapper around a simple C# bool.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUBool.value">
+            <summary>
+            The true/false value that this represents
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUBool.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>		
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.#ctor(System.Boolean)">
+            <summary>
+            Creates a OUBool with the given value.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.IsCorrectType(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.IsCorrectType(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.ToString">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToString"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a OUBool from binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.op_Implicit(OpenUp.DataStructures.ValueStructures.OUBool)~System.Boolean">
+            <summary>
+            OUBools implicitly convert to normal booleans
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.op_Implicit(System.Boolean)~OpenUp.DataStructures.ValueStructures.OUBool">
+            <summary>
+            Booleans implicitly convert to OUBools
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.op_Implicit(OpenUp.DataStructures.ValueStructures.OUBool)~System.String">
+            <summary>
+            OUBools implicitly convert to strings.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUBool.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUColor">
+            <summary>
+            A OUValue wrapper for Unity Colors.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUColor.value">
+            <summary>
+            The color that this represents.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUColor.DEFAULT">
+            <inheritdoc />
+            <inheritdoc cref="!:OUValue.DEFAULT"/>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUColor.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUColor.#ctor(UnityEngine.Color)">
+            <summary>
+            Creates a OUColor for the given value
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUColor.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUColor.IsCorrectType(System.ArraySegment{System.Byte})">
+            <summary>
+            Checks if the binary data is interpretable as an OUColor, which
+            requires a string that is readable by <see cref="!:GetColor.FromStringNullable"/>
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUColor._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUColor.ToString">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToString"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUColor.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a new OUColor from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUColor.op_Implicit(OpenUp.DataStructures.ValueStructures.OUColor)~UnityEngine.Color">
+            <summary>
+            OUColors get implicitly casted to <see cref="T:UnityEngine.Color"/>
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUColor.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUDict">
+            <summary>
+            Wraps Key-Value pairs collection in a OUValue.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUDict.value">
+            <summary>
+            The collection of key-value pairs.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUDict.Item(System.String)">
+            <summary>
+            Indexed accessor, same as a <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            </summary>
+            <param name="key">Key of value in collection.</param>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUDict.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict.#ctor">
+            <summary>
+            Empty constructor.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict.#ctor(System.ArraySegment{System.Byte},OpenUp.DataStructures.ValueStructures.ValueType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenUp.DataStructures.ValueStructures.OUDict"/> class created from the data given.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="subType"></param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict.#ctor(System.Collections.Generic.Dictionary{System.String,OpenUp.DataStructures.ValueStructures.OUValue})">
+            <summary>
+            Construct a OUDict that wraps the given dictionary.
+            </summary>
+            <remarks>
+            The given dictionary is not copied but passed by reference, changing
+            the dictionary will change this OUDict's value.
+            </remarks>
+            <param name="given">The given dictionary</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>		
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict.IsCorrectType(System.ArraySegment{System.Byte})">
+            <summary>
+            Checks if the given binary data can be converted to a OUDict,
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates as new OUDict from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict.op_Implicit(OpenUp.DataStructures.ValueStructures.OUDict)~System.Collections.Generic.Dictionary{System.String,OpenUp.DataStructures.ValueStructures.OUValue}">
+            <summary>
+            OUDicts implicitly convert to <see cref="T:System.Collections.Generic.Dictionary`2">Dictionary&lt;string,OUValue&gt;</see>
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUDict.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUEnum.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUList">
+            <summary>
+            Wraps ordered collections of OUValues in a single containing OUValue.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUList.value">
+            <summary>
+            The collection of OUValues.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUList.Item(System.Int32)">
+            <summary>
+            Indexer, similar to C# Lists or Javascript Array.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUList.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUList.#ctor">
+            <summary>
+            Needed for the MongoDB Serializer
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUList.Count">
+            <summary>
+            Returns the number of elements in this OUList.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUList.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUList.IsCorrectType(System.ArraySegment{System.Byte})">
+            <summary>
+            Checks if the given binary data is interpretable as a OUList.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUList._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUList.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a new OUList from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUList.op_Implicit(OpenUp.DataStructures.ValueStructures.OUList)~System.Collections.Generic.List{OpenUp.DataStructures.ValueStructures.OUValue}">
+            <summary>
+            OULists get implicitly converted to <see cref="T:System.Collections.Generic.List`1">List&lt;OUValue&gt;</see>
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUList.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUModel">
+            <summary>
+            Wraps info needed to import a GLTF model.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUModel.url">
+            <summary>
+            URL to a root <c>.gtlf</c> file.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUModel.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUModel.#ctor(System.String)">
+            <summary>
+            Construct a OUModel with the given string as url.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUModel.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUModel.IsCorrectType(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.IsCorrectType(System.ArraySegment{System.Byte})"/>
+            <summary>
+            Checks if some binary data can be converted to a OUModel.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUModel._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUModel.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a new OUModel from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUModel.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUNumber">
+            <summary>
+            OUValue wrapper for numeric types.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUNumber.value">
+            <summary>
+            The wrapped value.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUNumber.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.#ctor(System.Single)">
+            <summary>
+            Constructs a OUNumber for a given number.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.IsCorrectType(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.IsCorrectType(System.ArraySegment{System.Byte})"/>
+            <summary>
+            Checks if some binary data can be interpreted as a OUNumber.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.ToString">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToString"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a new OUNumber from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.op_Implicit(OpenUp.DataStructures.ValueStructures.OUNumber)~System.Single">
+            <summary>
+            OUNumbers are implicitly converted to numeric types.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.op_Implicit(OpenUp.DataStructures.ValueStructures.OUNumber)~System.Int32">
+            <summary>
+            OUNumbers are implicitly converted to numeric types.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.op_Implicit(OpenUp.DataStructures.ValueStructures.OUNumber)~System.Double">
+            <summary>
+            OUNumbers are implicitly converted to numeric types.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUNumber.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUText">
+            <summary>
+            Wraps a <see cref="T:System.String"/> in a OUValue.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUText.value">
+            <summary>
+            The string value.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUText.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUText.#ctor(System.String)">
+            <summary>
+            Constructs a OUText wrapping the given string.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUText.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUText.IsCorrectType(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.IsCorrectType(System.ArraySegment{System.Byte})"/>
+            <summary>
+            Checks if some binary data is interpretable as an OUText.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUText._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUText.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a new OUText from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUText.op_Implicit(OpenUp.DataStructures.ValueStructures.OUText)~System.String">
+            <summary>
+            OUTexts implicitly convert to the string they wrap.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUText.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUTransformation">
+            <summary>
+            Wraps a position, rotation, and scale in a OUValue.
+            </summary>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUTransformation.Structure">
+            <summary>
+            Holds the position, rotation, and scale in a single struct.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUTransformation.Structure.position">
+            <summary>
+            The position of a <see cref="T:OpenUp.DataStructures.ValueStructures.OUTransformation"/>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUTransformation.Structure.rotation">
+            <summary>
+            The rotation of a <see cref="T:OpenUp.DataStructures.ValueStructures.OUTransformation"/>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUTransformation.Structure.scale">
+            <summary>
+            The scale of a <see cref="T:OpenUp.DataStructures.ValueStructures.OUTransformation"/>
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUTransformation.value">
+            <summary>
+            The position, rotation, and scale values.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUTransformation.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>        
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.#ctor(OpenUp.DataStructures.ValueStructures.OUTransformation.Structure)">
+            <summary>
+            Creates a OUTransformation for the given position, rotation, and scale.
+            </summary>
+            <param name="given"></param>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.GetPosition(System.ArraySegment{System.Byte})">
+            <summary>
+            Get a 3D position from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.GetRotation(System.ArraySegment{System.Byte})">
+            <summary>
+            Get a 3D rotation from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.GetScale(System.ArraySegment{System.Byte})">
+            <summary>
+            Get a 3D scale from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.IsCorrectType(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.IsCorrectType(System.ArraySegment{System.Byte})"/>
+            <summary>
+            Checks if some binary data is interpretable as a OUTransform. 
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a new OUTransformation from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.op_Implicit(OpenUp.DataStructures.ValueStructures.OUTransformation)~OpenUp.DataStructures.ValueStructures.OUTransformation.Structure">
+            <summary>
+            OUTransformations implicitly get cast to OUTransformation.Structure
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUTransformation.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUValue">
+            <summary>
+            Base value type for properties of all items in the Solution Interpreter,
+            derived implementations wrap around a C# type.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUValue.type">
+            <summary>
+            The enum type of the OUValue.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUValue.IsCorrectType(System.ArraySegment{System.Byte})">
+            <summary>
+            Checks if some binary data is convertible to this subtype of OUValue.
+            </summary>
+            <param name="data">The data that has to be checked.</param>
+            <returns>True if it can be converted, otherwise false.</returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Set the value of the OUValue equal to what is in the binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUValue._WriteToBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates a binary representation for the OUValue
+            </summary>
+            <returns></returns>
+            <remarks>Does NOT encode the type</remarks>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUValue.ToString">
+            <summary>
+            Converts the value to a string, if the variable can be turned into a string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUValue.UpdateValue(OpenUp.DataStructures.ValueStructures.OUValue)">
+            <summary>
+            Updates the OUValue by setting it's value equal to that of the passed OUValue.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if the passed OUValue is not the same type as this OUValue.
+            </exception>
+            <exception cref="T:System.NotImplementedException">
+            Not all types have this method implemented, this error is thrown when it is called on such a type.
+            </exception>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUValue.Create(System.ArraySegment{System.Byte},OpenUp.DataStructures.ValueStructures.ValueType)">
+            <summary>
+            Creates a OUValue from the given data and type. Does not check
+            if the data is the correct type.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUValue.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.ValueStructures.OUVector3">
+            <summary>
+            Wraps a <see cref="T:UnityEngine.Vector3"/> in a OUValue.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.ValueStructures.OUVector3.value">
+            <summary>
+            The wrapped Vector3
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.ValueStructures.OUVector3.type">
+            <inheritdoc />
+            <inheritdoc cref="P:OpenUp.DataStructures.ValueStructures.OUValue.type"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.#ctor">
+            <summary>
+            Empty constructor for empty initialization.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.#ctor(UnityEngine.Vector3)">
+            <summary>
+            Creates a new OUVector3 with the given value.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.SetFromBytes(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.SetFromBytes(System.ArraySegment{System.Byte})"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.IsCorrectType(System.ArraySegment{System.Byte})">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.IsCorrectType(System.ArraySegment{System.Byte})"/>
+            <summary>
+            Checks if some binary data is interpretable as a OUVector3.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3._WriteToBytes(System.Byte[],System.Int32)">
+            <inheritdoc />
+            <inheritdoc cref="M:OpenUp.DataStructures.ValueStructures.OUValue.ToBytes"/>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.Create(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates a new OUVector3 from some binary data.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.op_Implicit(OpenUp.DataStructures.ValueStructures.OUVector3)~UnityEngine.Vector3">
+            <summary>
+            OUVector3s implicitly convert to the wrapped <see cref="T:UnityEngine.Vector3"/>.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.op_Equality(OpenUp.DataStructures.ValueStructures.OUVector3,UnityEngine.Vector3)">
+            <summary>
+            OUVector3s can compare to Vector3 as if they were Vector3s themselves
+            using <seealso cref="M:UnityEngine.Vector3.op_Equality(UnityEngine.Vector3,UnityEngine.Vector3)"/>
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.op_Inequality(OpenUp.DataStructures.ValueStructures.OUVector3,UnityEngine.Vector3)">
+            <summary>
+            OUVector3s can compare to Vector3 as if they were Vector3s themselves
+            using <seealso cref="M:UnityEngine.Vector3.op_Inequality(UnityEngine.Vector3,UnityEngine.Vector3)"/>
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.ValueStructures.OUVector3.ValueEquals(System.Object)">
+            <summary>
+            Evaluates if this list is equal to the given object on a value to value basis.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenUp.DataStructures.VisualizationStructure">
+            <summary>
+            Holds the data of a <see cref="!:Visualization"/>.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.VisualizationStructure.props">
+            <summary>
+            Properties for the visual.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.VisualizationStructure._type">
+            <summary>
+            Backing field for <see cref="P:OpenUp.DataStructures.VisualizationStructure.type"/>.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.VisualizationStructure.type">
+            <summary>
+            Type of the visual.
+            </summary>
+        </member>
+        <member name="P:OpenUp.DataStructures.VisualizationStructure.shape">
+            <summary>
+            The shape for the properties.
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.VisualizationStructure.removed">
+            <summary>
+            Whether the object has been removed.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.VisualizationStructure.#ctor(System.ArraySegment{System.Byte})">
+            <summary>
+            Constructs visual data from some binary data.
+            </summary>
+            <param name="data">The binary data.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.VisualizationStructure.SetBasics(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets basic details from some binary data.
+            </summary>
+            <param name="data">Binary data for the entire visual.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.VisualizationStructure.SetProps(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets the properties in the property list from some binary data.
+            </summary>
+            <param name="data">The binary data.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.VisualizationStructure.UpdateProps(System.ArraySegment{System.Byte})">
+            <summary>
+            Updates the properties in the property list from some binary data.
+            </summary>
+            <param name="data">The binary data.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.VisualizationStructure.SetFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Updates this visual to match some binary data.
+            short-circuits if updates aren't needed according to hashes.
+            </summary>
+            <param name="data">Some binary data.</param>
+        </member>
+        <member name="M:OpenUp.DataStructures.VisualizationStructure.WriteToBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates a binary representation of the visual.
+            </summary>
+        </member>
+        <member name="M:OpenUp.DataStructures.VisualizationStructure.Remove">
+            <summary>
+            Remove the data?
+            </summary>
+        </member>
+        <member name="F:OpenUp.DataStructures.VisualizationStructure.NONE">
+            <summary>
+            An empty visualization that displays nothing.
+            </summary>
+        </member>
+        <member name="T:OpenUp.Updating.ReaderMap.FieldReadMethodAttribute">
+            <summary>
+            The attribute is used to mark the method that return a reader for a field
+            </summary>
+            <seealso cref="M:OpenUp.Updating.ReaderMap.GetReaderFor(System.Type,System.String)"/>
+            <remarks>Inherits from <see cref="T:UnityEngine.Scripting.PreserveAttribute"/> so that Unity does not remove any of the marked methods.</remarks>
+        </member>
+        <member name="T:OpenUp.Updating.Templating.TemplateSpecificData">
+            <summary>
+            Specifies a configurable aspect of a template that has to be set each time the
+            template is loaded.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.TemplateSpecificData.paths">
+            <summary>
+            A set of paths that this value has to be written onto.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.TemplateSpecificData.name">
+            <summary>
+            The display name for this value.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.TemplateSpecificData.description">
+            <summary>
+            Description for this value to help the user.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.TemplateSpecificData.type">
+            <summary>
+            The type of data for this value.
+            </summary>
+        </member>
+        <member name="T:OpenUp.Updating.Templating.Template">
+            <summary>
+            Struct used for defining templates for specialized objects.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.Template.id">
+            <summary>
+            Template ID
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.Template.name">
+            <summary>
+            The display name for the template.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.Template.dataUpdate">
+            <summary>
+            The update to push to add the template to the solution.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.Template.customSettings">
+            <summary>
+            These points need to be configured each time the template is added.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Templating.Template.rootObject">
+            <summary>
+            When adding the template as an object, this is the root object.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Updating.Templating.Template.CreateUpdate(System.Collections.Generic.Dictionary{System.String,System.ArraySegment{System.Byte}})">
+            <summary>
+            Creates a new <see cref="T:OpenUp.Updating.Update"/> with configured values.
+            </summary>
+            <exception cref="T:System.NotImplementedException">Can't configure most values yet.</exception>
+        </member>
+        <member name="T:OpenUp.Updating.IUpdateTarget">
+            <summary>
+            Anything that can be edited by and <see cref="T:OpenUp.Updating.Update"/> must implement
+            this interface.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Updating.IUpdateTarget.SetFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Set the value of this object from some binary data.
+            </summary>
+            <param name="bytes"></param>
+        </member>
+        <member name="M:OpenUp.Updating.IUpdateTarget.GetTarget(System.String)">
+            <summary>
+            Gets a nested field that is also an <see cref="T:OpenUp.Updating.IUpdateTarget"/>, allows the
+            <see cref="T:OpenUp.Updating.Update"/> to get nested parts of the data structure.
+            </summary>
+            <param name="field">The name of the field to access</param>
+            <remarks>Collection data type (e.g. List, or Dictionary) should treat the field param as a key.</remarks>
+            <returns>The nested object.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.IUpdateTarget.GetValue(System.String)">
+            <summary>
+            Gets the value of a nested field.
+            </summary>
+            <param name="field">The name of the field to access</param>
+            <remarks>Collection data type (e.g. List, or Dictionary) should treat the field param as a key.</remarks>
+            <returns>The nested object.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.IUpdateTarget.SetValue(System.String,System.ArraySegment{System.Byte})">
+            <summary>
+            Changes the value of the given field using some binary data.
+            </summary>
+            <param name="field">The field to change.</param>
+            <remarks>Collection data type (e.g. List, or Dictionary) should treat the field param as a key.</remarks>
+            <param name="value">Binary data for the new value of the field.</param>
+            <returns>The amount of bytes written</returns>
+        </member>
+        <member name="M:OpenUp.Updating.IUpdateTarget.RemoveValue(System.String)">
+            <summary>
+            Removes the given value and field from the data structure.
+            </summary>
+            <param name="field">the field to remove.</param>
+            <remarks>Structures with fixed fields (e.g. AppStructure, or Event) should throw a <see cref="T:System.NotSupportedException"/></remarks>
+        </member>
+        <member name="T:OpenUp.Updating.UpdateApplicationTool">
+            <summary>
+            This tool is used to apply updates to all objects that implement the <see cref="T:OpenUp.DataStructures.IUpdateable"/>
+            interface.
+            </summary>
+            <remarks>
+            This object has to be initialized via the <see cref="M:OpenUp.Updating.UpdateApplicationTool.InitializeMap"/> method. Once that has been called,
+            Reflection and <see cref="N:System.Linq.Expressions"/> gets used to create a collection of static methods
+            that can be used to get and set all fields/properties of each <see cref="T:OpenUp.DataStructures.IUpdateable"/> implementer. 
+            </remarks>
+            <remarks>
+            Only properties and fields who's value type implements the <see cref="T:OpenUp.DataStructures.IUpdateable"/> interface can
+            be gotten and set via this tool.
+            </remarks>
+        </member>
+        <member name="F:OpenUp.Updating.UpdateApplicationTool.targetTypes">
+            <summary>
+            This array contains all known types that implement the <see cref="T:OpenUp.DataStructures.IUpdateable"/> interface.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.InitializeMap">
+            <summary>
+            Runs through the DataStructures to find all types settable from bytes, and constructs the static
+            getters and setters for each type. Once this has completed, the tool can be used to apply updates.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.GetTarget(OpenUp.Updating.IUpdateTarget,System.String)">
+            <summary>
+            Returns the object stored under the given string.
+            </summary>
+            <param name="target">The object who's field you want to access.</param>
+            <param name="field">The field you want to access.</param>
+            <returns>The nested object.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.ApplyUpdate(OpenUp.Updating.IUpdateTarget,OpenUp.Updating.Update)">
+            <summary>
+            Applies a <see cref="T:OpenUp.Updating.Update"/> to some data by using getters ins <see cref="!:GetterMaps"/> to get each object in the path
+            and using the setter in <see cref="!:SetterMaps"/> to set the field at the final position in the path. 
+            </summary>
+            <param name="rootObject">The root object who's data you want to update.</param>
+            <param name="update">The update to apply.</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.ApplyDelete(OpenUp.Updating.IUpdateTarget,OpenUp.Updating.Update)">
+            <summary>
+            Applies an <see cref="T:OpenUp.Updating.Update"/> with <see cref="F:OpenUp.Updating.Update.type"/> set to <see cref="F:OpenUp.Updating.UpdateType.DELETE"/>
+            which deletes and object at the given path.
+            </summary>
+            <param name="rootObject">The root object who's data you want to change.</param>
+            <param name="update">The update to apply.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Can only apply delete updates to objects that are indexed, cannot remove properties on objects that have a specific set of properties.
+            </exception>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.GetTypeAt(OpenUp.Updating.UpdatePath)">
+            <summary>
+            Attempts to get the current type at a point in the data. This returns the type as
+            it is in the current data, meaning that inheriting types are returned where appropriate.
+            </summary>
+            <param name="path">The path to the object.</param>
+            <returns>The type of the object.</returns>
+            <exception cref="T:System.Exception">Thrown when the path does not point to an object in the data.</exception>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.GetDeclaredTypeAt(OpenUp.Updating.UpdatePath)">
+            <summary>
+            Get the type that the object at the path is declared as. This will always return
+            exactly the type declared, even if the data has the object as an inheriting class.
+            </summary>
+            <param name="path">The path to the object</param>
+            <returns>The <see cref="T:System.Type"/> of whatever is at the given path.</returns>
+            <exception cref="T:System.Exception">Thrown if the path does not point to any data in the object.</exception>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.GetValueAt``1(OpenUp.Updating.IUpdateTarget,OpenUp.Updating.UpdatePath)">
+            <summary>
+            Searches through an object to get the value of some nested field using the UpdatePath.
+            </summary>
+            <param name="rootObject">The object to search through.</param>
+            <param name="path">The path to go to.</param>
+            <typeparam name="T">The type of value expected.</typeparam>
+            <returns></returns>
+            <exception cref="T:System.Exception">Thrown if the get fails, see the inner exception for details.</exception>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.GetValueAt(OpenUp.Updating.IUpdateTarget,OpenUp.Updating.UpdatePath)">
+            <summary>
+            Searches through an object to get the value of some nested field using the UpdatePath.
+            </summary>
+            <param name="rootObject">The object to search through.</param>
+            <param name="path">The path to go to.</param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Thrown if the get fails, see the inner exception for details.</exception>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateApplicationTool.GetValue(OpenUp.Updating.Update)">
+            <summary>
+            Gets the value of a <see cref="T:OpenUp.Updating.Update"/>
+            </summary>
+            <param name="update"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">Thrown if the update is not a SET update as only SET updates have a value.</exception>
+        </member>
+        <member name="T:OpenUp.Updating.UpdateType">
+            <summary>
+            The type of update. 
+            </summary>
+            <remarks>The values given are to ensure that blank data correctly gets seen as an invalid update</remarks>
+        </member>
+        <member name="F:OpenUp.Updating.UpdateType.SET">
+            <summary>
+            Sets the value of a property/field. If it is an indexed field (e.g. a <see cref="T:System.Collections.Generic.Dictionary`2"/>),
+            then this can also create objects along its path.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.UpdateType.DELETE">
+            <summary>
+            Removes a value entirely, only works for indexed fields.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.UpdateType.COMPOSITE">
+            <summary>
+            Multiple updates bundled into one, (e.g. an update adding a object to the data
+            and an update to load the object in on startup)
+            </summary>
+        </member>
+        <member name="T:OpenUp.Updating.InvalidUpdateException">
+            <summary>
+            Exception indicating that an attempted update to the data was invalid.
+            </summary>
+        </member>
+        <member name="T:OpenUp.Updating.Update">
+            <summary>
+            Represents a change to the app data.
+            </summary>
+        </member>
+        <member name="T:OpenUp.Updating.Update.UpdateList">
+            <summary>
+            A collection of updates that implements the <see cref="T:OpenUp.Updating.IUpdateTarget"/> interface
+            which is required for templating.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Updating.Update.UpdateList.#ctor(System.Collections.Generic.IEnumerable{OpenUp.Updating.Update})">
+            <summary>
+            creates a new UpdateList containing the given updates.
+            </summary>
+            <param name="updates"></param>
+        </member>
+        <member name="M:OpenUp.Updating.Update.UpdateList.#ctor">
+            <summary>
+            Creates an empty list of updates.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Updating.Update.UpdateList.SetFromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Sets the entire contents of the list from some binary data. 
+            </summary>
+            <param name="bytes"></param>
+        </member>
+        <member name="M:OpenUp.Updating.Update.UpdateList.ToBytes">
+            <summary>
+            Converts the entire list into binary data that can be transmitted and read back via
+            <see cref="M:OpenUp.Updating.Update.UpdateList.SetFromBytes(System.ArraySegment{System.Byte})"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Updating.Update.UpdateList.WriteToBuffer(System.Byte[],System.Int32)">
+            <summary>
+            Writes the update list to a buffer of binary data.
+            </summary>
+            <param name="buffer">The binary buffer</param>
+            <param name="startIdx">The index of the buffer to start writing the binary data</param>
+        </member>
+        <member name="M:OpenUp.Updating.Update.UpdateList.GetByteLength">
+            <summary>
+            Returns the size of list in binary.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:OpenUp.Updating.Update.type">
+            <summary>
+            The type of update.
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Update.path">
+            <summary>
+            The path to the field/property that has to be updated.
+            </summary>
+        </member>
+        <member name="P:OpenUp.Updating.Update.value">
+            <summary>
+            The new value in byte format.
+            </summary>
+            <remarks>
+            This and <see cref="P:OpenUp.Updating.Update.valueObject"/> are linked, update one and the other will change to match
+            </remarks>
+        </member>
+        <member name="P:OpenUp.Updating.Update.valueObject">
+            <summary>
+            The new value in native format 
+            </summary>
+        </member>
+        <member name="F:OpenUp.Updating.Update.updates">
+            <summary>
+            If the update is a composite update, then this field contains all the updates that have been bundled together.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Updating.Update.#ctor">
+            <summary>
+            Creates a new update.
+            </summary>
+        </member>
+        <member name="M:OpenUp.Updating.Update.#ctor(OpenUp.Updating.Update[])">
+            <summary>
+            Constructor overload for easily creating a composite update from an array of updates.
+            </summary>
+            <param name="updates">Array of updates that compose this update.</param>
+        </member>
+        <member name="M:OpenUp.Updating.Update.#ctor(System.ArraySegment{System.Byte},System.Int32@)">
+            <summary>
+            Default constructor to create an update using data provided in <paramref name="data"/>.
+            </summary>
+            <param name="data">The update in binary format.</param>
+            <param name="idx">The index of the last byte of the update relative to the first byte.</param>
+            <remarks>
+            The <see cref="!:idx"/> parameter can be used to read where the next object in the data starts. 
+            </remarks>
+            <exception cref="T:OpenUp.Updating.InvalidUpdateException">Thrown if the update was not formatted correctly.</exception>
+        </member>
+        <member name="M:OpenUp.Updating.Update.ApplyTo(OpenUp.Updating.IUpdateTarget)">
+            <summary>
+            Applies the update to some data.
+            </summary>
+            <param name="target">The data to be updated.</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddNewBehaviour(OpenUp.DataStructures.ElementID,OpenUp.DataStructures.BehaviourType,OpenUp.DataStructures.PropertyList)">
+            <summary>
+            Standard update create and add a new behaviour.
+            </summary>
+            <param name="id">Object id.</param>
+            <param name="type">Behaviour type/name.</param>
+            <param name="template">A JSONObject with specific values for this behaviour.</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddBehaviourToObject(OpenUp.DataStructures.BehaviourType,System.String)">
+            <summary>
+            Helper method for adding a behaviour to the object when one of its properties are being set in an expression.
+            </summary>
+            <param name="type"></param>
+            <returns>Returns null if the object already has the behaviour</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddBehaviourToObject(OpenUp.DataStructures.BehaviourType,OpenUp.DataStructures.ElementID)">
+            <summary>
+            Helper method for adding a behaviour to the object when one of its properties are being set in an expression.
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.RemoveBehaviour(OpenUp.DataStructures.ElementID,System.String)">
+            <summary>
+            Update that removes a <paramref name="behaviour"/> from an object with id: <paramref name="id"/>.
+            </summary>
+            <param name="id">Object id.</param>
+            <param name="behaviour">Behaviour type/name.</param>
+            <param name="template">A JSONObject with specific values for this behaviour.</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.RemoveChild(OpenUp.DataStructures.ElementID)">
+            <summary>
+            Update that unparents the child.
+            </summary>
+            <seealso cref="T:OpenUp.Updating.Update"/>
+            <seealso cref="T:OpenUp.DataStructures.ElementID"/>
+            <param name="child">The child to unparent.</param>
+            <exception cref="T:System.Exception">object with id <paramref name="child"/> has no parent to be removed from.</exception>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddChildToBe(OpenUp.DataStructures.ElementID,System.String)">
+            <summary>
+            Update that adds an object, not yet created, as a child of a target.
+            <para>If you intend to parent an existing object, use <see cref="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddChild(OpenUp.DataStructures.ElementID,OpenUp.DataStructures.ElementID,System.Boolean)"/> instead to avoid unusual transform values. Eg: scaling, position</para>
+            </summary>
+            <seealso cref="T:OpenUp.Updating.Update"/>
+            <seealso cref="T:OpenUp.DataStructures.ElementID"/>
+            <param name="target">The target parent.</param>
+            <param name="childID">The child identifier.</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddChild(OpenUp.DataStructures.ElementID,OpenUp.DataStructures.ElementID,System.Boolean)">
+            <summary>
+            Update that adds the child to a target.
+            </summary>
+            <seealso cref="T:OpenUp.Updating.Update"/>
+            <seealso cref="T:OpenUp.DataStructures.ElementID"/>
+            <param name="target">The target.</param>
+            <param name="childID">The child identifier.</param>
+            <param name="worldPositionStays">if set to <c>true</c> [world position stays]. This includes scaling and rotation. Set to <c>false</c> if the transform values should changed to be relative to its target parent.</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddChildren(OpenUp.DataStructures.ElementID,System.Collections.Generic.List{OpenUp.DataStructures.ElementID},System.Boolean)">
+            <summary>
+            Update that adds multiple children to target.
+            </summary>
+            <seealso cref="T:OpenUp.Updating.Update"/>
+            <seealso cref="T:OpenUp.DataStructures.ElementID"/>
+            <param name="target">The target.</param>
+            <param name="childrenIDs">The children ids.</param>
+            <param name="worldPositionStays">if set to <c>true</c> [world position stays]. This includes scaling and rotation. Set to <c>false</c> if the transform values should changed to be relative to its target parent.</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.SafeDeleteObject(System.String)">
+            <summary>
+            Update that safely delete the object. This ensures references to it are cut. Eg: actions that load it, storynodes that edit it.
+            </summary>
+            <seealso cref="T:OpenUp.Updating.Update"/>
+            <param name="id">The object identifier.</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.NewObjectForModel(System.String,System.String)">
+            <summary>
+            Adds a new UnityObject to the solution with a model
+            </summary>
+            <param name="modelURL">The url from which to load a model.</param>
+            <param name="name">The name given to the eventual object in the session.</param>
+            <returns>An update that creates an object with a model.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.NewObject(System.String,OpenUp.DataStructures.VisualizationStructure)">
+            <summary>
+            Update that adds a new object to the session.
+            </summary>
+            <param name="name">Name to give the new object.</param>
+            <param name="visual">Data defining the type of object created.</param>
+            <returns>An update that creates a new object in the session.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddNewObjectToStory(System.String,OpenUp.DataStructures.VisualizationStructure)">
+            <summary>
+            A combination of <see cref="!:NewObject(string, JSONObject)"/>, <see cref="!:UpdateFactory.NewAction(OpenUp.Interpreter.Actions.ActionType, string, JSONObject)"/> and <see cref="!:UpdateFactory.AddActionToNode(string)"/>.
+            <para>These will create updates to, in order: create a new object, create an action that loads this object, add the action to the current storynode.</para>
+            </summary>
+            <param name="name">Name of the new object.</param>
+            <param name="visual">Data defining the type of object created.</param>
+            <returns>An update that adds the creation of a new object to the current storyline node.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddNewObjectForModelToStory(System.String,System.String)">
+            <summary>
+            A combination of <see cref="!:NewObject(string, JSONObject)"/>, <see cref="!:UpdateFactory.NewAction(OpenUp.Interpreter.Actions.ActionType, string, JSONObject)"/> and <see cref="!:UpdateFactory.AddActionToNode(string)"/>.
+            <para>These will create updates to, in order: Create a new object with a 3D model, create an action that loads the new object, add the action to the current storynode. </para>
+            </summary>
+            <param name="modelURL">The url from which to load a model.</param>
+            <param name="name">The name given to the eventual object in the session.</param>
+            <returns>An Update that creates an action to load an object with a specific model, and adds it to the current storyline node.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddObjectToMain(OpenUp.DataStructures.ObjectStructure)">
+            <summary>
+            Adds the given object to the main setup.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.AddActionToMainStorySetup(OpenUp.DataStructures.ExpressionStructures.OUExpression,System.String)">
+            <summary>
+            Update that adds an action id to the setup actions of the currently-active storynode.
+            </summary>
+            <seealso cref="T:OpenUp.Updating.Update"/>
+            <param name="expression"></param>
+            <param name="name">The name for the expression</param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.RenameStory(OpenUp.Updating.UpdatePath,System.String)">
+            <summary>
+            Update that renames a story.
+            </summary>
+            <seealso cref="T:OpenUp.Updating.Update"/>
+        </member>
+        <member name="M:OpenUp.Updating.UpdateFactory.UpdateFactory.Rename(OpenUp.Updating.UpdatePath,System.String)">
+            <summary>
+            Update that renames a story.
+            </summary>
+            <seealso cref="T:OpenUp.Updating.Update"/>
+        </member>
+        <member name="T:OpenUp.Updating.UpdatePath">
+            <summary>
+            Represents a path to some field in the app data.
+            </summary>
+            <remarks>
+            A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"/> is used so that paths can be passed around
+            without fears of errors and bugs due to paths being changed after initialization.
+            </remarks>
+            <seealso cref="T:System.Collections.IEnumerable" />
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.#ctor(OpenUp.Updating.UpdatePath[])">
+            <summary>
+            Takes multiple paths and concatenates them.
+            </summary>
+            <param name="paths"></param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.#ctor(System.String[])">
+            <summary>
+            Takes multiple fields and concatenates them as if they were each an update path.
+            </summary>
+            <param name="paths"></param>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Takes a list of fields and concatenates them as if they were each an update path.
+            </summary>
+            <param name="list"></param>		
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.PathsToList(OpenUp.Updating.UpdatePath[])">
+            <summary>
+            Converts an array of paths into a list of strings.
+            </summary>
+            <param name="paths">The paths to concatenate.</param>
+            <returns>A single list of all fields in the paths.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.IsSubPathOf(OpenUp.Updating.UpdatePath)">
+            <summary>
+            checks if a path point to data contained within the data
+            of another path.
+            </summary>
+            <param name="other"></param>
+            <returns>
+            Returns true if this path points to data contained
+            inside the data of the other.
+            </returns>
+            <remarks>Returns true if the paths are identical</remarks>
+            <remarks>Returns true if other is empty</remarks>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.FromBytes(System.ArraySegment{System.Byte},OpenUp.Updating.UpdatePath@)">
+            <summary>
+            Reads an <see cref="T:OpenUp.Updating.UpdatePath"/> from some byte array.
+            </summary>
+            <param name="bytes">The data to read the <see cref="T:OpenUp.Updating.UpdatePath"/> from.</param>
+            <param name="path"></param>
+            <returns>The read path.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.ToString">
+            <summary>
+            Creates a string representation of a path.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.op_Implicit(System.String)~OpenUp.Updating.UpdatePath">
+            <summary>
+            Single fields can be converted to a path to that field.
+            </summary>
+            <param name="item">The name of the field.</param>
+            <returns>A path to the given field.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.op_BitwiseAnd(OpenUp.Updating.UpdatePath,OpenUp.Updating.UpdatePath)">
+            <summary>
+            The <c>&amp;</c> operator is used to concatenate paths.
+            </summary>
+            <param name="path">Path to some nested object.</param>
+            <param name="extra">Path from the nested object to some deeply nested object therein.</param>
+            <returns>Absolute path to the deeply nested object.</returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.op_Subtraction(OpenUp.Updating.UpdatePath,System.Int32)">
+            <summary>
+            The <c>-</c> operator is used to get less nested paths, for instance to point to a parent object.
+            </summary>
+            <param name="path">The deeply nested path.</param>
+            <param name="steps">How many steps back in the path you want to go (e.g. <c>- 1</c> would point to a parent object).</param>
+            <returns>The less nested path.</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown if you attempt to go more steps back than in the path.</exception>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.op_Equality(OpenUp.Updating.UpdatePath,OpenUp.Updating.UpdatePath)">
+            <summary>
+            Equality has been overriden so that paths are equal if they point to the
+            same field in the data.
+            </summary>
+            <param name="path1"></param>
+            <param name="path2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.op_Inequality(OpenUp.Updating.UpdatePath,OpenUp.Updating.UpdatePath)">
+            <summary>
+            Paths have their equality overriden so that they are equal if they point
+            to the same field in the data.
+            </summary>
+            <param name="path1"></param>
+            <param name="path2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.Equals(OpenUp.Updating.UpdatePath)">
+            <summary>
+            Equality has been overriden so that paths are equal if they point to the
+            same object in the data.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.Equals(System.Object)">
+            <summary>
+            Equality has been overriden so that paths are equal if they point to the
+            same object in the data.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenUp.Updating.UpdatePath.GetHashCode">
+            <summary>
+            As equality has been overriden we must also override <see cref="M:OpenUp.Updating.UpdatePath.GetHashCode"/>
+            so that hash codes are identical for paths pointing to the same point in the
+            data structure.
+            </summary>
+            <remarks>The main reason this has been done is to shut up C#'s warnings.</remarks>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
